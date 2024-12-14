@@ -1,69 +1,37 @@
-/* Reset box-sizing globally */
-* {
+body {
+  margin: 0;
+  border: 20px solid blueviolet;
+  border-image: url("./assets/bricks.png") 8% round;
+  overflow: hidden;
+  background-color: white;
   box-sizing: border-box;
 }
 
-/* Body styling */
-body {
-  border: 20px solid rgb(222, 218, 226); /* Solid fallback border color */
-  border-image: url("../src/assets/bricks.png") 5% round; /* Brick border */
-
-  overflow: hidden; /* Prevent scrolling and clipping */
-
-  background-image: url("../src/assets/grass.webp"); /* Grass background */
-  background-size: cover; /* Make the background cover the entire body */
-  background-repeat: no-repeat; /* Prevent the background from repeating */
-  background-position: center; /* Center the background image */
-
-  margin: 0; /* Remove default body margin */
-  padding: 0; /* Ensure padding does not interfere with border */
-  display: flex; /* Center the canvas */
-  justify-content: center;
-  align-items: center;
-  height: 100vh; /* Ensure the body covers the entire viewport */
-  width: 100vw; /* Ensure the body spans the full width */
-}
-
-/* Canvas styling */
 #canvas {
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(255, 255, 255, 0.8);
-  border: 20px solid rgb(222, 218, 226); /* Solid fallback border color */
-  border-image: url("../src/assets/bricks.png") 5% round; /* Brick border */
-  box-sizing: border-box; /* Ensure borders are included in the total size */
+  height: calc(100vh - 40px);
+  width: calc(100vw - 40px);
   position: relative;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  font-family: JetBrains Mono, monospace;
 }
 
-
-/* Ball styling */
 #ball {
-  width: 44px;
   height: 44px;
-  border-radius: 50%; /* Make the ball circular */
-  background-image: url("../src/assets/tennis-ball.webp"); /* Ball texture */
-  background-size: contain;
-  position: absolute; /* For animation or positioning within canvas */
-  box-shadow: inset 0px 0px 14px 0px rgba(18, 3, 3, 0.5); /* Inner shadow */
-  border: 5px solid #000; /* Optional: Add border around the ball (can adjust color and width) */
+  width: 44px;
+  border-radius: 100%;
+  position: absolute;
+  box-shadow: inset 0px 0px 14px 0px rgba(0, 0, 0, 0.5);
+  background-image: url("./assets/tennis-ball.webp");
+  background-size: 46px 46px;
 }
 
-
-/* Instructions styling */
 #instructions {
   position: absolute;
-  color: rgba(131, 125, 125, 0.85); /* Increased opacity for better visibility */
-  font-size: 28px; /* Slightly larger text for better readability */
+  color: #00000058;
+  font-size: 24px;
   text-align: center;
-  user-select: none; /* Prevent text selection */
-  line-height: 38px; /* Increased line height for comfortable spacing */
-  top: 50%; /* Centering vertically */
-  left: 50%; /* Centering horizontally */
-  transform: translate(-50%, -50%); /* Ensures precise centering */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Adding a subtle shadow for readability */
-  padding: 10px; /* Adding padding for better touch area */
+  user-select: none;
+  line-height: 32px;
 }
-

@@ -8,9 +8,10 @@ const App = () => {
   const minSpeed = 0.5;    // Slightly higher minimum speed to make the ball slow down slowly
   const ballRadius = 22;   // Radius of the ball (half of 44px)
   const borderWidth = 20;  // The width of the border (adjust as necessary)
-
+  //const { width: canvasWidth, height: canvasHeight } = canvas.getBoundingClientRect();
   // Initial ball state
   const [ballState, setBallState] = useState({
+    
     position: { x: window.innerWidth / 2, y: window.innerHeight / 2 },
     velocity: { x: 0, y: 0 },
     isMoving: false,
@@ -51,26 +52,29 @@ const App = () => {
     // Update ball position, considering the canvas borders
     let newX = ballState.position.x + ballState.velocity.x;
     let newY = ballState.position.y + ballState.velocity.y;
-
+   
+    console.log(window.innerWidth);
     // Create a copy of the velocity to modify
     let velocityX = ballState.velocity.x;
     let velocityY = ballState.velocity.y;
 
-    // Check for collisions with the left/right walls (ensure it stays inside the canvas)
-    if (newX - ballRadius < borderWidth) {
-      newX = borderWidth + ballRadius; // Prevent ball from going into the left border
+    if (newX <= borderWidth && velocityX <= 0) {
+      newX = borderWidth; // Prevent ball from going into the left border
       velocityX = -velocityX; // Reflect the ball
-    } else if (newX + ballRadius > window.innerWidth - borderWidth) {
-      newX = window.innerWidth - borderWidth - ballRadius; // Prevent ball from going into the right border
+    } else if (newX + 2*ballRadius >= window.innerWidth - borderWidth && velocityX > 0) {
+      console.log(newX + 2*ballRadius);
+      console.log(window.innerWidth - borderWidth);
+      newX = window.innerWidth - borderWidth - (2*ballRadius); // Prevent ball from going into the right border
+      console.log(newX);
       velocityX = -velocityX; // Reflect the ball
     }
 
     // Check for collisions with the top/bottom walls
-    if (newY - ballRadius < borderWidth) {
-      newY = borderWidth + ballRadius; // Prevent ball from going into the top border
+    if (newY <= borderWidth && velocityY <= 0) {
+      newY = borderWidth; // Prevent ball from going into the top border
       velocityY = -velocityY; // Reflect the ball
-    } else if (newY + ballRadius > window.innerHeight - borderWidth) {
-      newY = window.innerHeight - borderWidth - ballRadius; // Prevent ball from going into the bottom border
+    } else if (newY + 2*ballRadius >= window.innerHeight - borderWidth && velocityY > 0) {
+      newY = window.innerHeight - borderWidth - (2*ballRadius); // Prevent ball from going into the bottom border
       velocityY = -velocityY; // Reflect the ball
     }
 
@@ -104,7 +108,7 @@ const App = () => {
       id="canvas"
       ref={canvasRef}
       onClick={launchBall}
-      style={{ width: "100vw", height: "100vh", position: "relative", backgroundColor: "white" }}
+      style={{ position: "relative", backgroundColor: "white" }}
     >
       <div
         id="ball"
